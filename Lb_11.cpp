@@ -17,7 +17,7 @@ struct VectorIndex// структура, в которой храняться н
     int end;
 };
 
-std::vector<VectorIndex> generate_indexes(std::vector<int> vector, int thread_count)// функция разделения вектора на потоки(по сути)
+std::vector<VectorIndex> generate_indexes(std::vector<int> vector, int thread_count)
 {
     std::vector<VectorIndex> result;
     int slice_size = 0;
