@@ -33,25 +33,9 @@ std::vector<VectorIndex> generate_indexes(std::vector<int> vector, int thread_co
     return result;
 }
 
-std::vector<int> slicing(std::vector<int>& arr ,VectorIndex vi)// функция "разрезания" вектора
-{
-    auto start = arr.begin() + vi.start;
-    auto end = arr.begin() + vi.end;
-    std::vector<int> result;// (vi.end - vi.start);
-    for (int i = vi.start; i < vi.end; i++)
-    {
-        result.push_back(arr[i]);
-    }
-    //copy(start, end, result.begin());
-    return result;
-}
-
 void find_min(std::vector<int>& vec, VectorIndex vi, int name, int& result)// функция поиска минимального значения ветора
 {
-    vector_mtx.lock();
-    std::vector<int> slice = slicing(vec, vi);
-    vector_mtx.unlock();
-    int k = *std::min_element(slice.begin(), slice.end());
+    int k = *std::min_element(vec.begin() +vi.start,vec.begin() + vi.end);
     cout_mtx.lock();
     std::cout << "thread " << name << ": " << k << std::endl;
     cout_mtx.unlock();
@@ -119,6 +103,3 @@ int main()
     }
     return 0;
 }
-// В результате можно сказать, что много поток эффективен при 5 потоках
-// при одном потоке скорость 189231 мксек, а при 5 потоках 83224 мксек
-// самое оптимальное число эллементов 12600000+-500000
