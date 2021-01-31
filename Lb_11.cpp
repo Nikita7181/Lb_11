@@ -37,8 +37,12 @@ std::vector<int> slicing(std::vector<int>& arr ,VectorIndex vi)// функция
 {
     auto start = arr.begin() + vi.start;
     auto end = arr.begin() + vi.end;
-    std::vector<int> result(vi.end - vi.start);
-    copy(start, end, result.begin());
+    std::vector<int> result;// (vi.end - vi.start);
+    for (int i = vi.start; i < vi.end; i++)
+    {
+        result.push_back(arr[i]);
+    }
+    //copy(start, end, result.begin());
     return result;
 }
 
@@ -69,7 +73,7 @@ std::vector<int> generate_vector(int size)// функция заполнения
 
 int main()
 {
-    const int thread_count = 24;// измение кол-во потоков
+    const int thread_count = 5;// измение кол-во потоков
     int result_min_value;
     std::vector<int> vector;
     std::vector<VectorIndex> indexes;
